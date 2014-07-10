@@ -1,0 +1,80 @@
+var * {
+    id: int64,
+    name: string,
+    description: {
+        languages: var * string[2],
+        texts: json # map[string[2] * string]
+    },
+    status: string,
+    funded_amount: float64,
+    basket_amount: ?float64,
+    paid_amount: ?float64,
+    image: {
+        id: int64,
+        template_id: int64,
+    },
+    video: json, # ?{
+    #    id: int64,
+    #    youtube_id: string
+    #},
+    activity: string,
+    sector: string,
+    use: string,
+    delinquent: bool,
+    location: {
+        country_code: string[2],
+        country: string,
+        town: ?string,
+        geo: {
+            level: string,
+            pairs: string,
+            type: string,
+        }
+    },
+    partner_id: int64,
+    posted_date: ?datetime,
+    planned_expiration_date: ?datetime,
+    loan_amount: float64,
+    currency_exchange_loss_amount: ?float64,
+    borrowers: var * {
+        first_name: string,
+        last_name: string,
+        gender: string[1], # GenderType
+        pictured: bool,
+    },
+    terms: {
+        disbursal_date: ?datetime,
+        disbursal_currency: ?string,
+        disbursal_amount: float64,
+        loan_amount: float64,
+        local_payments: var * {
+            due_date: datetime,
+            amount: float64,
+        },
+        scheduled_payments: var * {
+            due_date: datetime,
+            amount: float64,
+        },
+        loss_liability: {
+            nonpayment: string, # categorical[string, [\"lender\", \"partner\"]],
+            currency_exchange: string,
+            currency_exchange_coverage_rate: ?float64,
+        }
+    },
+    payments: var * {
+        amount: float64,
+        local_amount: float64,
+        processed_date: datetime,
+        settlement_date: datetime,
+        rounded_local_amount: float64,
+        currency_exchange_loss_amount: float64,
+        payment_id: int64,
+        comment: ?string,
+    },
+    funded_date: ?datetime,
+    paid_date: ?datetime,
+    journal_totals: {
+        entries: int64,
+        bulkEntries: int64,
+    }
+}
